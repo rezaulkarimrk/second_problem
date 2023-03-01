@@ -7,7 +7,11 @@ function stringCheck( $string ){
 	}
 	$last = $len-1;
 	for( $i=0; $i<=($len/2)-1; $i++){
-        if( ($string[$i] == '(' ) && ($string[$last] == ')' )){
+        if( ($string[$i] == '(' ) && ($string[$i+1] == ')') || (($string[$i] == '{' ) && ($string[$i+1] == '}' )) || (($string[$i] == '[' ) && ($string[$i+1] == ']' ) )){
+            // $last--;
+            $i++;
+        }
+        else if( ($string[$i] == '(' ) && ($string[$last] == ')' )){
             $last--;
         }
         else if(($string[$i] == '{' ) && ($string[$last] == '}' )){
@@ -25,7 +29,7 @@ function stringCheck( $string ){
     return true;
 }
 
-$string = "(([{[(]]}]))";
+$string = "(([(){[[]]}]))";
 
 $result = stringCheck($string);
 if($result){
